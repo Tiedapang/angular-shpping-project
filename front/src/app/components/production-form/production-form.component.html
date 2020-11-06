@@ -1,0 +1,12 @@
+<h2>添加商品信息</h2>
+<div class="product_list">
+  <form class="prouduct-form" [formGroup]="formProduct" (ngSubmit)="doSubmit()">
+    <label>名 称：</label><input formControlName="name" type="text" id="pro-name" placeholder="名称" /><br>
+    <label>价 格：</label><input formControlName="price" type="text" id="price" placeholder="价格" /><br>
+    <label>单 位：</label><input formControlName="unit" type="text" id="unit"   placeholder="单位" /><br>
+    <label>图 片：</label><input formControlName="imgPath" type="file" id="imgPath"   placeholder="图片" ><br>
+  </form>
+  <button (click)="doSubmit()" class="submit">添加</button>
+
+</div>
+

@@ -1,0 +1,14 @@
+<table class="cart-table">
+  <tr class="cart-table-header">
+    <th>产品名称</th>
+    <th>单 价</th>
+    <th>数 量</th>
+    <th>操 作</th>
+  </tr>
+  <tr *ngFor="let cart of carts">
+    <td>{{cart.product.name}}</td>
+    <td>{{cart.product.price}}</td>
+    <td>{{cart.count}}</td>
+    <td><button (click)="editCartNum(cart,1)">+</button><button (click)="editCartNum(cart,-1)">-</button></td>
+  </tr>
+</table>

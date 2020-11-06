@@ -1,0 +1,24 @@
+.cart-table{
+  position: fixed;
+  bottom: 60px;
+  right: 200px;
+  height: 50px;
+  overflow:auto;
+}
+.cart-table tr{
+  height: 30px;
+  width: 60px;
+}
+.cart-table th ,td{
+  padding-right: 20px;
+  text-align: center;
+}
+.cart-table td button{
+  margin-left: 20px;
+}
+.cart-table-header{
+  background-color: #1875d1;
+  color:white;
+  font-weight: bolder;
+  font-size: 18px;
+}
