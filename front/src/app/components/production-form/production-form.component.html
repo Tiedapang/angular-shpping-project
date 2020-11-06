@@ -2,7 +2,17 @@
 <div class="product_list">
   <form class="prouduct-form" [formGroup]="formProduct" (ngSubmit)="doSubmit()">
     <label>名 称：</label><input formControlName="name" type="text" id="pro-name" placeholder="名称" /><br>
+
+    <span class="checkName" *ngIf="!formProduct.get('name').untouched&&formProduct.get('name').hasError('required')">
+        必填项，不能为空!<br>
+      </span>
     <label>价 格：</label><input formControlName="price" type="text" id="price" placeholder="价格" /><br>
+    <span class="checkName" *ngIf="formProduct.get('price').hasError('required')">
+       必填项，不能为空!<br>
+      </span>
+    <span class="checkName" *ngIf="!formProduct.get('price').hasError('required')&&formProduct.get('price').dirty">
+       请输入数字！<br>
+      </span>
     <label>单 位：</label><input formControlName="unit" type="text" id="unit"   placeholder="单位" /><br>
     <label>图 片：</label><input formControlName="imgPath" type="file" id="imgPath"   placeholder="图片" ><br>
   </form>
