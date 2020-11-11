@@ -2,6 +2,9 @@
 <div class="products">
   <app-product *ngFor="let product of products" [product]="product" ></app-product>
 </div>
+<div class="pagination">
+  <app-pagination (pageChange)="onPageChange($event)"></app-pagination>
+</div>
 <div class="cart">
   <img (click)="checkCart()" class="cart-img" src="./assets/img/cart.jpeg">
   <app-cart *ngIf="isCartAvailable" [carts]="carts"></app-cart>

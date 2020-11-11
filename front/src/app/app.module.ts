@@ -10,8 +10,19 @@ import { ProductionFormComponent } from './components/production-form/production
 import { OrdersComponent } from './components/orders/orders.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ShoppingComponent } from './components/shopping/shopping.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { zh_CN } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh';
+import {NzButtonModule} from 'ng-zorro-antd/button';
 
 
+registerLocaleData(zh);
+
+
+// @ts-ignore
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +31,8 @@ import { ShoppingComponent } from './components/shopping/shopping.component';
     ProductionFormComponent,
     OrdersComponent,
     CartComponent,
-    ShoppingComponent
+    ShoppingComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
@@ -28,8 +40,9 @@ import { ShoppingComponent } from './components/shopping/shopping.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NzButtonModule
   ],
-  providers: [],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

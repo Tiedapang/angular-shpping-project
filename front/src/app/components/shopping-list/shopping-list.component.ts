@@ -3,7 +3,7 @@ import {ShoppingListService} from '../../services/shopping-list.service';
 import {Product} from '../product/Product';
 import {Cart} from '../cart/Cart';
 import {CartServiceService} from '../../services/cart-service.service';
-
+import { NzIconModule } from 'ng-zorro-antd/icon';
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
@@ -16,13 +16,15 @@ export class ShoppingListComponent implements OnInit {
   constructor(private shoppingListService: ShoppingListService, private cartService: CartServiceService) {
     this.isCartAvailable = false;
   }
-
   ngOnInit(): void {
-    this.shoppingListService.getProducts().subscribe(products => this.products = products);
+    // this.shoppingListService.getProducts().subscribe(products => this.products = products);
   }
   checkCart(): void{
     this.isCartAvailable = !this.isCartAvailable;
     this.cartService.checkCart().subscribe(carts => this.carts = carts);
   }
-
+  onPageChange(products: Product[]): void{
+    // tslint:disable-next-line:no-console
+   this.products = products;
+  }
 }
