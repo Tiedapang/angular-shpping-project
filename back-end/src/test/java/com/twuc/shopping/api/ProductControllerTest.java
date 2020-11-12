@@ -38,12 +38,6 @@ class ProductControllerTest {
     @BeforeEach
     void setUp() {
         productRepository.deleteAll();
-//        ProductPO productPo = ProductPO.builder()
-//                .name("可乐")
-//                .price(5)
-//                .unit("瓶")
-//                .build();
-//        productRepository.save(productPo);
     }
     @Test
     public void shouldAddProduct() throws Exception {
@@ -63,14 +57,19 @@ class ProductControllerTest {
         assertEquals(productPOS.get(0).getName(),"可乐");
 
     }
-//    @Test
-//    public void shouldGetProducts() throws Exception {
-//        HttpServletRequest httpServletRequest = null;
-//        httpServletRequest.setAttribute("pageSize",0);
-//        httpServletRequest.setAttribute("pageNumber",1);
-//        mockMvc.perform(get("/product"))
-//                .andExpect(jsonPath("$", hasSize(1)));
-//    }
+    @Test
+    public void shouldGetProducts() throws Exception {
+        ProductPO productPO = ProductPO.builder()
+                .name("可乐")
+                .price(5.0)
+                .unit("瓶")
+                .build();
+        ProductPO productPO1 = productRepository.save(productPO);
+        mockMvc.perform(get("/product?pageSize=10&pageNumber=1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.productList[0].name",is("可乐")))
+                .andExpect(jsonPath("$.totalCount", is(1)));
+    }
 
     @Test
     public void shouldDeleteProductById() throws Exception {

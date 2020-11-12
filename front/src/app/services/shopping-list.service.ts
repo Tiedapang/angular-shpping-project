@@ -17,9 +17,7 @@ export class ShoppingListService {
     return this.http.post('/api/product', product);
   }
   getProductsPageAble(pageAble): Observable<any> {
-    return this.http.get(`/api/product/`, { params: pageAble }).pipe(
-        map(res => res)
-    );
+    return this.http.get(`/api/product/`, { params: pageAble });
   }
     deleteProduct(product: Product): Observable<any>{
     return this.http.delete(`/api/product/${product.id}`);

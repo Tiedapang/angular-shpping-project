@@ -28,6 +28,12 @@ export class ProductionFormComponent implements OnInit {
     this.shoppingListService.saveProduct(this.formProduct.value)
         .subscribe((data: any) => {
           this.message.success('恭喜您🎉，添加商品信息成功！');
+        }, error => {
+          if ( error.status == 0){
+            this.message.error(`抱歉，请检查您的网络！`);
+          }else {
+            this.message.error(`抱歉，${error.error.message}`);
+          }
         });
   }
 }

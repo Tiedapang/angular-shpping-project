@@ -43,6 +43,10 @@ export class ProductComponent implements OnInit {
     this.shoppingListService.saveProduct(this.updateProduct.value).subscribe((data: any) => {
       this.message.success('恭喜您🎉，修改商品信息成功！');
       this.product = this.updateProduct.value;
+    }, error => {
+      if ( error.status == 0){
+        this.message.error(`抱歉，请检查您的网络！`);
+      }
     });
     this.isVisible = false;
   }
@@ -77,6 +81,12 @@ export class ProductComponent implements OnInit {
                     this.shoppingListService.deleteProduct(this.product).subscribe((data: any) => {
                       this.message.success('恭喜您🎉，删除商品信息成功！');
                       window.location.reload();
+                    }, error => {
+                      if ( error.status == 0){
+                        this.message.error(`抱歉，请检查您的网络！`);
+                      }else {
+                        this.message.error(`抱歉，${error.error.message}`);
+                      }
                     });
                   }
               ).catch(() => console.log('Oops errors!'))

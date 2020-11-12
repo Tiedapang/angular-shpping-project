@@ -17,6 +17,7 @@ import com.twuc.shopping.domain.Product;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 @RestController
 @Validated
@@ -27,10 +28,8 @@ public class ProductController {
   @Autowired
   ProductService productService;
   @GetMapping("/product")
-  public ProductResponse getProductListByPageAble(HttpServletRequest req){
-    int pageSize = Integer.parseInt(req.getParameter("pageSize"));
-    int pageNumber = Integer.parseInt(req.getParameter("pageNumber"))-1;
-    Pageable pageable = PageRequest.of(pageNumber,pageSize);
+  public ProductResponse getProductListByPageAble(@PathParam("pageSize") String pageSize, @PathParam("pageNumber") String pageNumber){
+    Pageable pageable = PageRequest.of(Integer.parseInt(pageNumber)-1,Integer.parseInt(pageSize));
     ProductResponse productResponse = productService.findAll(pageable);
     return productResponse;
   }

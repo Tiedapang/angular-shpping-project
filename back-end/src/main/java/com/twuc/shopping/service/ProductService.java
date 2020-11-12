@@ -35,12 +35,16 @@ public class ProductService {
     }
 
     public void addProduct(ProductPO productPO) {
+    if(productPO.getId()==0){
       Optional<ProductPO> productPo = productRepository.findByName(productPO.getName());
       if (productPo.isPresent()) {
         throw new ProductNameAlreadyExistException("该商品名已经存在！");
-      }else{
-        productRepository.save(productPO);
       }
+
+    }
+
+    productRepository.save(productPO);
+
 
     }
 
