@@ -8,9 +8,12 @@ import com.twuc.shopping.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasKey;
@@ -23,7 +26,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.junit.jupiter.api.Assertions.*;
-
+@SpringBootTest
+@AutoConfigureMockMvc
 class ProductControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -34,39 +38,49 @@ class ProductControllerTest {
     @BeforeEach
     void setUp() {
         productRepository.deleteAll();
+//        ProductPO productPo = ProductPO.builder()
+//                .name("可乐")
+//                .price(5)
+//                .unit("瓶")
+//                .build();
+//        productRepository.save(productPo);
     }
     @Test
     public void shouldAddProduct() throws Exception {
         Product product = Product.builder()
                 .name("可乐")
-                .price(5)
+                .price(5.0)
                 .unit("瓶")
                 .build();
         ObjectMapper objectMapper = new ObjectMapper();
-        String json = objectMapper.writeValueAsString(product);
-        mockMvc.perform(post("/product/event").contentType(json)
+        String jsonStr = objectMapper.writeValueAsString(product);
+        mockMvc.perform(post("/product").content(jsonStr)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$", is(true)));
+                .andExpect(status().isCreated());
+        List<ProductPO> productPOS= productRepository.findAll();
+        assertNotNull(productPOS);
+        assertEquals(productPOS.size(),1);
+        assertEquals(productPOS.get(0).getName(),"可乐");
 
     }
-    @Test
-    public void shouldDeleteProduct() throws Exception {
-        List<ProductPO> products = productRepository.findAll();
-        if(products.size() > 0){
-            mockMvc.perform(delete("/product/event")
-                    .contentType(String.valueOf(products.get(0).getId()))
-            ).andExpect(status().isOk());
-        }
-    }
+//    @Test
+//    public void shouldGetProducts() throws Exception {
+//        HttpServletRequest httpServletRequest = null;
+//        httpServletRequest.setAttribute("pageSize",0);
+//        httpServletRequest.setAttribute("pageNumber",1);
+//        mockMvc.perform(get("/product"))
+//                .andExpect(jsonPath("$", hasSize(1)));
+//    }
 
     @Test
-    public void shouldGetProducts() throws Exception {
-        ProductPO productPo = ProductPO.builder()
+    public void shouldDeleteProductById() throws Exception {
+        ProductPO productPO = ProductPO.builder()
                 .name("可乐")
-                .price(5)
+                .price(5.0)
                 .unit("瓶")
                 .build();
-        mockMvc.perform(get("/product/list"))
-                .andExpect(jsonPath("$", hasSize(1)));
+        ProductPO productPO1 = productRepository.save(productPO);
+        mockMvc.perform(delete("/product/{id}", productPO1.getId())).andExpect(status().isOk());
+        assertEquals(productRepository.findAll().size(), 0);
     }
 }

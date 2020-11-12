@@ -1,22 +1,53 @@
-<h2>添加商品信息</h2>
+<h2 class="add-prodcut-title">添加商品信息</h2>
 <div class="product_list">
-  <form class="prouduct-form" [formGroup]="formProduct" (ngSubmit)="doSubmit()">
-    <label>名 称：</label><input formControlName="name" type="text" id="pro-name" placeholder="名称" /><br>
-
-    <span class="checkName" *ngIf="!formProduct.get('name').untouched&&formProduct.get('name').hasError('required')">
-        必填项，不能为空!<br>
-      </span>
-    <label>价 格：</label><input formControlName="price" type="text" id="price" placeholder="价格" /><br>
-    <span class="checkName" *ngIf="formProduct.get('price').hasError('required')">
-       必填项，不能为空!<br>
-      </span>
-    <span class="checkName" *ngIf="!formProduct.get('price').hasError('required')&&formProduct.get('price').dirty">
-       请输入数字！<br>
-      </span>
-    <label>单 位：</label><input formControlName="unit" type="text" id="unit"   placeholder="单位" /><br>
-    <label>图 片：</label><input formControlName="imgPath" type="file" id="imgPath"   placeholder="图片" ><br>
+  <form nz-form [formGroup]="formProduct" (ngSubmit)="doSubmit()">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">名称</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入商品名称！" nzHasFeedback>
+        <input nz-input formControlName="name" id="name" placeholder="名称" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="price" nzRequired>单价</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="请输入商品单价，要求为数字！" nzHasFeedback>
+        <input nz-input  id="price" formControlName="price"  placeholder="单价" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="unit">单位</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input formControlName="unit" id="unit" placeholder="单位" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="imgPath" >图片路径</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input   type="file" formControlName="imgPath" id="imgPath" placeholder="图片路径" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item style="padding-left: 250px">
+      <nz-form-control>
+        <button nz-button nzType="primary">保存</button>
+      </nz-form-control>
+    </nz-form-item>
   </form>
-  <button (click)="doSubmit()" class="submit">添加</button>
+<!--  <form class="prouduct-form" [formGroup]="formProduct" (ngSubmit)="doSubmit()">-->
+<!--    <label>名 称：</label><input formControlName="name" type="text" id="pro-name" placeholder="名称" /><br>-->
+
+<!--    <span class="checkName" *ngIf="!formProduct.get('name').untouched&&formProduct.get('name').hasError('required')">-->
+<!--        必填项，不能为空!<br>-->
+<!--      </span>-->
+<!--    <label>价 格：</label><input formControlName="price" type="text" id="price" placeholder="价格" /><br>-->
+<!--    <span class="checkName" *ngIf="formProduct.get('price').hasError('required')">-->
+<!--       必填项，不能为空!<br>-->
+<!--      </span>-->
+<!--    <span class="checkName" *ngIf="!formProduct.get('price').hasError('required')&&formProduct.get('price').dirty">-->
+<!--       请输入数字！<br>-->
+<!--      </span>-->
+<!--    <label>单 位：</label><input formControlName="unit" type="text" id="unit"   placeholder="单位" /><br>-->
+<!--    <label>图 片：</label><input formControlName="imgPath" type="file" id="imgPath"   placeholder="图片" ><br>-->
+<!--  </form>-->
+<!--  <button (click)="doSubmit()" class="submit">添加</button>-->
 
 </div>
 

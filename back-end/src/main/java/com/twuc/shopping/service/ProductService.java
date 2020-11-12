@@ -2,18 +2,16 @@ package com.twuc.shopping.service;
 
 
 
-import com.twuc.shopping.api.ProductController;
 import com.twuc.shopping.domain.Product;
-import com.twuc.shopping.domain.ProductResponse;
+import com.twuc.shopping.exception.ProductNameAlreadyExistException;
+import com.twuc.shopping.exception.ProductNotExistException;
+import com.twuc.shopping.responsePo.ProductResponse;
 import com.twuc.shopping.po.ProductPO;
 import com.twuc.shopping.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -26,21 +24,22 @@ public class ProductService {
     this.productRepository = productRepository1;
 
   }
-    public List<ProductPO> findAll() {
-        return productRepository.findAll();
-    }
 
     public void deleteById(int deleteID) {
-        productRepository.deleteById(deleteID);
+    if(productRepository.findById(deleteID).isPresent()){
+      productRepository.deleteById(deleteID);
+    }else {
+      throw new ProductNotExistException("抱歉，该商品信息不存在！");
     }
 
-    public boolean addProduct(ProductPO productPO) {
+    }
+
+    public void addProduct(ProductPO productPO) {
       Optional<ProductPO> productPo = productRepository.findByName(productPO.getName());
       if (productPo.isPresent()) {
-        return false;
+        throw new ProductNameAlreadyExistException("该商品名已经存在！");
       }else{
         productRepository.save(productPO);
-        return true;
       }
 
     }
@@ -49,19 +48,17 @@ public class ProductService {
     return productRepository.findById(product_id).get();
     }
 
-    public boolean checkProductName(String productName) {
-    Optional<ProductPO> productPO = productRepository.findByName(productName);
-    if(productPO.equals(Optional.empty())){
-      return false;
-    }
-    return true;
-    }
 
   public ProductResponse findAll(Pageable pageable) {
     ProductResponse productResponse = new ProductResponse();
-    productResponse.setProductList(productRepository.findAll(pageable).stream().map(
+    Page<ProductPO> productPOS = productRepository.findAll(pageable);
+    if(productPOS == null){
+      return productResponse;
+    }
+    productResponse.setProductList(productPOS.stream().map(
             item ->
-                    Product .builder().name(item.getName())
+                    Product .builder().id(item.getId())
+                            .name(item.getName())
                             .price(item.getPrice())
                             .unit(item.getUnit())
                             .imgPath(item.getImgPath())

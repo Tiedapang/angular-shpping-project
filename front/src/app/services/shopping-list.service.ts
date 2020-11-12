@@ -13,20 +13,15 @@ export class ShoppingListService {
   getProducts(): Observable<Product[]>{
     return this.http.get<Product[]>('/api/product/list');
   }
-  saveProduct(product: Product): void{
-    this.http.post('/api/product', product).subscribe((data: any) => {
-      //  data:返回的数据
-      alert('添加成功！');
-    });
+  saveProduct(product: Product): Observable<any>{
+    return this.http.post('/api/product', product);
   }
-
-    // getProductsPageAble(pageAble: PageAble): Observable<any>{
-    // return this.http.get<Product[]>(`/api/product/`, {params: pageAble });
-    // }
   getProductsPageAble(pageAble): Observable<any> {
-    const url = `/api/product/`;
-    return this.http.get(url, { params: pageAble }).pipe(
+    return this.http.get(`/api/product/`, { params: pageAble }).pipe(
         map(res => res)
     );
   }
+    deleteProduct(product: Product): Observable<any>{
+    return this.http.delete(`/api/product/${product.id}`);
+    }
 }

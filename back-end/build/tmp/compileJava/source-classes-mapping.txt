@@ -4,28 +4,29 @@ com/twuc/shopping/domain/Order.java
 com/twuc/shopping/domain/Cart.java
  com.twuc.shopping.domain.Cart
  com.twuc.shopping.domain.Cart$CartBuilder
-com/twuc/shopping/exception/Error.java
- com.twuc.shopping.exception.Error
+com/twuc/shopping/exception/GlobalExceptionHandler.java
+ com.twuc.shopping.exception.GlobalExceptionHandler
+com/twuc/shopping/exception/ErrorResult.java
+ com.twuc.shopping.exception.ErrorResult
 com/twuc/shopping/domain/Product.java
  com.twuc.shopping.domain.Product
  com.twuc.shopping.domain.Product$ProductBuilder
 com/twuc/shopping/service/CartService.java
  com.twuc.shopping.service.CartService
+com/twuc/shopping/exception/ProductNameAlreadyExistException.java
+ com.twuc.shopping.exception.ProductNameAlreadyExistException
 com/twuc/shopping/repository/OrderRepository.java
  com.twuc.shopping.repository.OrderRepository
-com/twuc/shopping/CorsConfig.java
- com.twuc.shopping.CorsConfig
-com/twuc/shopping/po/ProductPO.java
- com.twuc.shopping.po.ProductPO
- com.twuc.shopping.po.ProductPO$ProductPOBuilder
+com/twuc/shopping/repository/ProductRepository.java
+ com.twuc.shopping.repository.ProductRepository
+com/twuc/shopping/exception/ProductNotExistException.java
+ com.twuc.shopping.exception.ProductNotExistException
 com/twuc/shopping/service/OrderService.java
  com.twuc.shopping.service.OrderService
 com/twuc/shopping/api/CartController.java
  com.twuc.shopping.api.CartController
 com/twuc/shopping/ShoppingApplication.java
  com.twuc.shopping.ShoppingApplication
-com/twuc/shopping/exception/RequestNotValidException.java
- com.twuc.shopping.exception.RequestNotValidException
 com/twuc/shopping/po/OrderPO.java
  com.twuc.shopping.po.OrderPO
  com.twuc.shopping.po.OrderPO$OrderPOBuilder
@@ -34,11 +35,14 @@ com/twuc/shopping/repository/CartRepository.java
 com/twuc/shopping/po/CartPO.java
  com.twuc.shopping.po.CartPO
  com.twuc.shopping.po.CartPO$CartPOBuilder
-com/twuc/shopping/repository/ProductRepository.java
- com.twuc.shopping.repository.ProductRepository
-com/twuc/shopping/domain/ProductResponse.java
- com.twuc.shopping.domain.ProductResponse
- com.twuc.shopping.domain.ProductResponse$ProductResponseBuilder
+com/twuc/shopping/CorsConfig.java
+ com.twuc.shopping.CorsConfig
+com/twuc/shopping/po/ProductPO.java
+ com.twuc.shopping.po.ProductPO
+ com.twuc.shopping.po.ProductPO$ProductPOBuilder
+com/twuc/shopping/responsePo/ProductResponse.java
+ com.twuc.shopping.responsePo.ProductResponse
+ com.twuc.shopping.responsePo.ProductResponse$ProductResponseBuilder
 com/twuc/shopping/api/ProductController.java
  com.twuc.shopping.api.ProductController
 com/twuc/shopping/api/OrderController.java

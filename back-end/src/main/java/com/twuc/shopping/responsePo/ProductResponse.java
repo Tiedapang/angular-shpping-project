@@ -1,5 +1,6 @@
-package com.twuc.shopping.domain;
+package com.twuc.shopping.responsePo;
 
+import com.twuc.shopping.domain.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

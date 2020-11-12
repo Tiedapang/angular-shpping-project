@@ -1,10 +1,11 @@
 .product{
-  margin-top: 20px;
-  margin-right: 20px;
+  margin-top: 30px;
+  margin-right: 40px;
 }
-.product h2{
+.product p{
   margin: 0;
   padding: 0;
+  font-size: 18px;
 }
 .product img{
   width: 200px;
@@ -14,25 +15,17 @@
   margin-top: 5px;
   font-size: 18px;
 }
-.product-details button{
-  margin-left: 5px;
-  background-color: #1875d1;
-  border: none;
-  width: 30px;
-  height: auto;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  text-align: center;
-}
+
 .product-price{
-  font-size: 18px;
+  font-size: 14px;
   padding-left: 3px;
+  color: red;
 }
 .product-unit{
   color: gray;
   font-size: 14px;
 }
-.product-details button{
-  margin-left: 130px;
+.operator{
+  float: right;
 }
+
